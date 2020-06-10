@@ -44,7 +44,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${maven-failsafe-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -79,6 +78,7 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <version>${maven-failsafe-plugin.version}</version>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <executions>
                     <execution>
