@@ -8,10 +8,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withMaven {
+                withMaven   (options: [jacocoPublisher(disabled: true)]) {
                     sh 'mvn clean verify'
                  }
             }
+        }
+    }
+    post {
+        always {
+            jacoco(execPattern: '**/*.exec')
         }
     }
 }
