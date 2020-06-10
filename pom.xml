@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <maven-failsafe-plugin.version>2.22.1</maven-failsafe-plugin.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
     </properties>
 
@@ -43,6 +44,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -74,6 +76,37 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>**/*IT.java</include>
+                        <include>**/*It.java</include>
+                    </includes>
+                    <reuseForks>true</reuseForks>
+                    <systemPropertyVariables>
+                        <user.timezone>UTC</user.timezone>
+                    </systemPropertyVariables>
+                    <failIfNoTests>false</failIfNoTests>
+                    <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+                    <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+                </configuration>
             </plugin>
         </plugins>
     </build>
